@@ -172,7 +172,7 @@
         /*  SHOW/HIDE SECTIONS
         /* ----------------------------------------------------------- */
 
-		if (window.location.hash && $('#link-' + window.location.hash.replace(/^#/, '')).length) {
+		/* if (window.location.hash && $('#link-' + window.location.hash.replace(/^#/, '')).length) {
 			$('#link-' + window.location.hash.replace(/^#/, '')).trigger('click');
 		}
 		window.userInteractionTimeout = null;
@@ -208,7 +208,7 @@
 					}
 				});
 			}
-		});
+		}); */
 
 		/* ----------------------------------------------------------- */
         /*  BACK TO MAIN SECTION IN MOBILE

@@ -767,7 +767,11 @@ html:not(.lt-ie10) .not-animated {
     color: #000;
   }
   .cd-stretchy-nav ul li:nth-of-type(5) a::after {
-    content: "\f2b6";
+    content: "\f2c3";
+    color: #000;
+  }
+  .cd-stretchy-nav ul li:nth-of-type(6) a::after {
+    content: "\f21b";
     color: #000;
   }
   .cd-stretchy-nav ul span {
