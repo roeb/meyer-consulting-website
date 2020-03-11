@@ -54,7 +54,9 @@
 				var n = $(this),
 					t = n.find(".cd-nav-trigger");
 				t.on("click", function (t) {
-					t.preventDefault(), n.toggleClass("nav-is-visible")
+					t.preventDefault();
+					n.toggleClass("nav-is-visible");
+					$(".stretchy-nav-background").toggleClass("active");
 				})
 			}), $(document).on("click", function (t) {
 				!$(t.target).is(".cd-nav-trigger") && !$(t.target).is(".cd-nav-trigger span") && n.removeClass("nav-is-visible");
