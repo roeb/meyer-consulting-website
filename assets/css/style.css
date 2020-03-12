@@ -84,6 +84,11 @@ hr.about-section {
   margin: 0px auto 50px;
 }
 
+hr.about-section.bottom {
+  /*   margin: 72px auto 50px; */
+  margin: 50px auto;
+}
+
 hr.about-section.skills {
   margin: 72px 12px 50px;
 }
@@ -1403,6 +1408,10 @@ body.light .personal-info ul h6 {
   min-width: 120px;
 }
 
+.personal-abstract {
+  padding: 0 15px;
+}
+
 /*** Badges ***/
 
 .badges {
@@ -2542,9 +2551,14 @@ ul.social-intro li a:hover i {
   }
   .row.personal-info>div:nth-child(2) {
     text-align: right;
-    margin-top: 30px
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
   }
   .row.personal-info>div:nth-child(2)>div:nth-child(2) {
+    text-align: left;
+  }
+  body.dark .personal-info h6 {
     text-align: left;
   }
   .resume-btn-container {
@@ -2585,6 +2599,10 @@ ul.social-intro li a:hover i {
     .main-text {
       max-width: 50vw;
       margin: 0 0 0 40px !important;
+    }
+    .row.personal-info>div:nth-child(2) {
+      display: flex;
+      justify-content: center;
     }
     @media only screen and (max-height:500px) and (orientation:landscape) {
       .call-to-actions-home {
@@ -2889,6 +2907,9 @@ ul.social-intro li a:hover i {
   }
   .list-1 {
     margin-bottom: 0;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
   }
   .list-2 {
     margin-top: 0;
