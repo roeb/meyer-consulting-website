@@ -1673,9 +1673,10 @@ body.light .personal-info ul h6 {
 }
 
 .skill-subtitle {
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
   color: #fff;
+  padding: 0 15px;
 }
 
 .skill-text {
@@ -1688,15 +1689,30 @@ body.light .personal-info ul h6 {
 }
 
 .skill-picture {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-top: 40px;
 }
 
+.skill-picture ul li {
+  background-color: #daa520;
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  -webkit-box-shadow: -6px 7px 6px -2px rgba(255, 255, 255, 0.22);
+  -moz-box-shadow: -6px 7px 6px -2px rgba(255, 255, 255, 0.22);
+  box-shadow: -6px 7px 6px -2px rgba(255, 255, 255, 0.22);
+
+}
+
+.skill-picture ul li span {
+  text-align: center;
+}
+
 .skill-frontend-area {
-  height: 200px;
-  width: 60%;
+  width: 80%;
   border-bottom: 1px dashed #daa520;
   display: flex;
   flex-direction: row;
@@ -1704,8 +1720,7 @@ body.light .personal-info ul h6 {
 }
 
 .skill-backend-area {
-  height: 200px;
-  width: 60%;
+  width: 80%;
   border-bottom: 1px dashed #daa520;
   display: flex;
   flex-direction: row;
@@ -1713,8 +1728,8 @@ body.light .personal-info ul h6 {
 }
 
 .skill-infra-area {
-  height: 200px;
-  width: 60%;
+  width: 80%;
+  min-height: 180px;
   display: flex;
   flex-direction: row;
   margin: 0 0 0 20px;
@@ -1722,10 +1737,11 @@ body.light .personal-info ul h6 {
 
 .skill-box {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   position: relative;
   padding: 20px 40px;
-
+  display: flex;
+  align-items: center;
 }
 
 .skill-box .skill-item {
@@ -1742,7 +1758,6 @@ body.light .personal-info ul h6 {
 .skill-area-label {
   text-transform: uppercase;
   color: #fff;
-  height: 100%;
   width: 40px;
   border-right: 1px solid #daa520;
 }
@@ -2801,17 +2816,14 @@ ul.social-intro li a:hover i {
 
     .skill-frontend-area {
       width: 100%;
-      height: 250px;
     }
 
     .skill-backend-area {
       width: 100%;
-      height: 250px;
     }
 
     .skill-infra-area {
       width: 100%;
-      height: 250px;
     }
 
     @media only screen and (max-height:500px) and (orientation:landscape) {
@@ -2824,50 +2836,19 @@ ul.social-intro li a:hover i {
   @media only screen and (max-width:1023px) and (orientation:portrait) {
     .skill-frontend-area {
       width: 100%;
-      height: 250px;
     }
 
     .skill-backend-area {
       width: 100%;
-      height: 350px;
     }
 
     .skill-infra-area {
       width: 100%;
-      height: 300px;
     }
 
     @media only screen and (max-width:760px) and (orientation:portrait) {
-      .skill-frontend-area {
-        width: 100%;
-        height: 500px;
-      }
-
-      .skill-backend-area {
-        width: 100%;
-        height: 650px;
-      }
-
-      .skill-infra-area {
-        width: 100%;
-        height: 450px;
-      }
-    }
-
-    @media only screen and (max-width:330px) and (orientation:portrait) {
-      .skill-frontend-area {
-        width: 100%;
-        height: 500px;
-      }
-
-      .skill-backend-area {
-        width: 100%;
-        height: 650px;
-      }
-
-      .skill-infra-area {
-        width: 100%;
-        height: 450px;
+      .skill-box {
+        padding: 20px 10px;
       }
     }
   }

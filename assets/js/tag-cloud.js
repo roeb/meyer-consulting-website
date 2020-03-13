@@ -41,9 +41,9 @@
 
     jQuery(document).ready(function ($) {
         window.addEventListener("resize", function () {
-            organizeSkillTags();
+            //organizeSkillTags();
         }, false);
 
-        organizeSkillTags();
+        //organizeSkillTags();
     });
 })(jQuery);
