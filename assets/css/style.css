@@ -1672,6 +1672,12 @@ body.light .personal-info ul h6 {
   padding-top: 50px;
 }
 
+.skill-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
 .skill-text {
   display: block;
   margin-bottom: 18px;
@@ -1679,6 +1685,75 @@ body.light .personal-info ul h6 {
   color: #555;
   font-weight: 300;
   text-transform: uppercase;
+}
+
+.skill-picture {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.skill-frontend-area {
+  height: 200px;
+  width: 60%;
+  border-bottom: 1px dashed #daa520;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0 0 20px;
+}
+
+.skill-backend-area {
+  height: 200px;
+  width: 60%;
+  border-bottom: 1px dashed #daa520;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 20px;
+}
+
+.skill-infra-area {
+  height: 200px;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 0 0 20px;
+}
+
+.skill-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 20px 40px;
+
+}
+
+.skill-box .skill-item {
+  color: #fff;
+  background-color: #daa520;
+  /* padding: 10px;
+  margin: 20px; */
+  border-radius: 100%;
+  position: absolute;
+  padding: 20px;
+  text-align: center;
+}
+
+.skill-area-label {
+  text-transform: uppercase;
+  color: #fff;
+  height: 100%;
+  width: 40px;
+  border-right: 1px solid #daa520;
+}
+
+.skill-area-label span {
+  transform: translateX(-50%) rotate(-90deg);
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  margin-top: -15px;
 }
 
 .chart-bar {
@@ -2724,9 +2799,75 @@ ul.social-intro li a:hover i {
       justify-content: center;
     }
 
+    .skill-frontend-area {
+      width: 100%;
+      height: 250px;
+    }
+
+    .skill-backend-area {
+      width: 100%;
+      height: 250px;
+    }
+
+    .skill-infra-area {
+      width: 100%;
+      height: 250px;
+    }
+
     @media only screen and (max-height:500px) and (orientation:landscape) {
       .call-to-actions-home {
         display: none;
+      }
+    }
+  }
+
+  @media only screen and (max-width:1023px) and (orientation:portrait) {
+    .skill-frontend-area {
+      width: 100%;
+      height: 250px;
+    }
+
+    .skill-backend-area {
+      width: 100%;
+      height: 350px;
+    }
+
+    .skill-infra-area {
+      width: 100%;
+      height: 300px;
+    }
+
+    @media only screen and (max-width:760px) and (orientation:portrait) {
+      .skill-frontend-area {
+        width: 100%;
+        height: 500px;
+      }
+
+      .skill-backend-area {
+        width: 100%;
+        height: 650px;
+      }
+
+      .skill-infra-area {
+        width: 100%;
+        height: 450px;
+      }
+    }
+
+    @media only screen and (max-width:330px) and (orientation:portrait) {
+      .skill-frontend-area {
+        width: 100%;
+        height: 500px;
+      }
+
+      .skill-backend-area {
+        width: 100%;
+        height: 650px;
+      }
+
+      .skill-infra-area {
+        width: 100%;
+        height: 450px;
       }
     }
   }
@@ -2863,6 +3004,7 @@ ul.social-intro li a:hover i {
   hr.skills-section {
     margin: 72px 12px 50px;
   }
+
 
   .personal-info-mobile p {
     font-family: 'Open Sans', sans-serif;
