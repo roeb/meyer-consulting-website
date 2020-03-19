@@ -3,7 +3,7 @@
 /* GOLDENROD #daa520
 ====================================================================== */
 
-.nav-container>div>ul li.active a, .nav-container>div>ul li:hover a, .btn.btn-secondary, .page-title h2 span, .back-mobile, .project-info-container .projects-info h3, .meta a, .meta i, .main-text h1 span, .badges h3 span, section#blog article h4:hover, body.dark section#blog article h4:hover, body.dark.blog article a h4:hover, .contact-container .contact .rightside h6 i, .page-title h2 span:nth-child(2), .skill-title, .custom-list h6 i, .blog article h4:hover, .comments-list .comment-reply, body.blog.dark .comments-list .comment-reply:hover, .contact-container ul.social-intro li a, .navigation li a i, .resume-items .item .card-header .year i.fa-caret-right, .badges h3 span, .chart-bar>.percent {
+.nav-container>div>ul li.active a, .nav-container>div>ul li:hover a, .btn.btn-secondary, .page-title h2 span, .back-mobile, .project-info-container .projects-info h3, .meta a, .meta i, .main-text h1 span, .badges h3 span, section#blog article h4:hover, body.dark section#blog article h4:hover, body.dark.blog article a h4:hover, .contact-container .contact .rightside h6 i, .page-title h2 span:nth-child(2), .skill-title, .custom-list h6 i, .blog article h4:hover, .comments-list .comment-reply, .blog.dark .comments-list .comment-reply:hover, .contact-container ul.social-intro li a, .navigation li a i, .resume-items .item .card-header .year i.fa-caret-right, .badges h3 span, .chart-bar>.percent {
 	color: #daa520;
 }
 
@@ -40,7 +40,7 @@
 	border-color: #daa520;
 }
 
-body.blog .container-fluid.page-title .content-banner {
+.blog .container-fluid.page-title .content-banner {
 	border-bottom: 8px solid #daa520;
 }
 

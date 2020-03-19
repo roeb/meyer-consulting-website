@@ -16,6 +16,7 @@
     <link type="text/css" media="all" href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link type="text/css" media="all" href="/assets/css/style.css" rel="stylesheet">
     <link type="text/css" media="all" href="/assets/css/skins/goldrenrod.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/rougify-github.css" rel="stylesheet">
 
     <!-- Template JS Files -->
     <script src="/assets/js/modernizr.js"></script>
@@ -37,7 +38,6 @@
 <script type="application/ld+json">
 {"description":"Trainer for Mircosoft Azure and Identity/Security. Development from Cloud and Web Solutions.","@type":"WebPage","url":"meyer-consulting.net/about.html","headline":"about","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-
 
 
     <!-- Google Analytics -->
@@ -72,37 +72,14 @@
         
         <li ><a href="/services"><span>My Services</span></a></li>
         
+        <li ><a href="/blog"><span>Blog</span></a></li>
+        
         <li ><a href="/contact"><span>Contact</span></a></li>
         
     </ul>
     <span aria-hidden="true" class="stretchy-nav-bg"></span>
 </div>
             <!-- Stretchy Navigation Ends -->
-            <!-- <div class="icon-box">
-                <ul>
-                    <li>
-                        <a href="https://twitter.com/roeb" target="_blank">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/roeb" target="_blank">
-                            <i class="fa fa-github"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/in/robert-meyer-332b2b28/" target="_blank">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank">
-                            <i class="fa fa-xing"></i>
-                        </a>
-                    </li>
-                </ul>
-
-            </div> -->
         </header>
         <!-- Header Ends -->
         <!-- Main Content Starts -->
@@ -475,6 +452,94 @@
 </section>
         </main>
         <footer id="footer">
+            <style>
+    #cookie-notice {
+        width: 100vw;
+        background: #ccc;
+        padding: 0.5rem 1rem;
+        display: none;
+        text-align: center;
+    }
+
+    #cookie-notice span {
+        color: #000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        color: #fff;
+    }
+
+    #cookie-notice a span {
+        color: #fff;
+    }
+
+    #cookie-notice a:hover span {
+        color: #fff;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice span {
+            display: block;
+            padding-top: 3px;
+            margin-bottom: 1rem;
+        }
+
+        #cookie-notice a {
+            position: relative;
+            bottom: 4px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>We would like to use third party cookies and scripts to improve the functionality of this website.</span>
+    <a id="cookie-notice-accept" class="btn">
+        <span>Approve</span>
+    </a>
+    <a href="/privacy" class="btn">
+        <span>
+            More info
+        </span>
+    </a>
+</div>
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    if (readCookie('cookie-notice-dismissed') == 'true') {
+        // Load Google Analytics here
+    } else {
+        document.getElementById('cookie-notice').style.display = 'block';
+    }
+    document.getElementById('cookie-notice-accept').addEventListener("click", function () {
+        createCookie('cookie-notice-dismissed', 'true', 31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+</script>
             <div class="social-media">
                 <a href="https://twitter.com/roeb" target="_blank">
                     <div class="social-icon twitter"></div>
@@ -488,15 +553,15 @@
                 <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank">
                     <div class="social-icon xing"></div>
                 </a>
-            </div>
 
-            <div class="legal-notice">
-                <a href="/impressum">
-                    Legal notice
-                </a>
-                <a href="/privacy">
-                    Privacy notice
-                </a>
+                <div class="legal-notice">
+                    <a href="/impressum">
+                        Legal notice
+                    </a>
+                    <a href="/privacy">
+                        Privacy notice
+                    </a>
+                </div>
             </div>
         </footer>
     </div>
@@ -510,10 +575,6 @@
     <script src="/assets/js/transition.js"></script>
     <!-- Main JS Initialization File -->
     <script src="/assets/js/custom.js"></script>
-
-    
-    <script src="/assets/js/tag-cloud.js"></script>
-    
 </body>
 
 </html>

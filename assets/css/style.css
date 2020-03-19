@@ -290,7 +290,7 @@ body.dark,
 body.dark .navigation,
 body.dark .resume-items .item .bullet,
 body.dark #main>section,
-body.blog.dark,
+.blog.dark,
 body.dark #home .home-content,
 body.dark .carousel-controls,
 body.dark .arrow {
@@ -306,7 +306,7 @@ body.dark .personal-info h6,
 body.dark .personal-info ul li div,
 body.dark .contact-container .contact .rightside h6,
 section#blog.dark article h4,
-body.blog.dark article h4,
+.blog.dark article h4,
 body.dark .main-text h1,
 body.light.dark-header .main-text h1,
 body.dark .project-details,
@@ -344,11 +344,11 @@ body.dark #cd-nav ul {
   box-shadow: none !important;
 }
 
-body.dark section#blog .meta {
+/* body.dark section#blog .meta {
   border-top: 1px solid #555;
   border-bottom: 1px solid #555;
 }
-
+ */
 body.dark hr.about-section,
 body.dark article hr,
 body.dark .contact-container hr {
@@ -433,7 +433,7 @@ body.dark .profile-picture img {
   border: 3px solid #353535;
 }
 
-body.blog.dark .comments-list .comment:not(.last) {
+.blog.dark .comments-list .comment:not(.last) {
   border-bottom: 1px solid #555;
 }
 
@@ -441,46 +441,46 @@ body.dark .contact-container .contact .leftside span i {
   color: rgba(255, 255, 255, .3);
 }
 
-body.blog.dark p,
-body.blog.dark .meta span {
+.blog.dark p,
+.blog.dark .meta span {
   color: #eee;
 }
 
-body.blog.dark .meta,
-body.blog .container-fluid.page-title .meta {
+.blog.dark .meta,
+.blog .container-fluid.page-title .meta {
   background: rgba(0, 0, 0, .6) !important;
 }
 
-body.blog.dark .pagination li:hover {
+.blog.dark .pagination li:hover {
   background: #333;
 }
 
-body.blog.dark .pagination li a {
+.blog.dark .pagination li a {
   color: #eee;
 }
 
-body.blog.dark .comments-form form .input-field label {
+.blog.dark .comments-form form .input-field label {
   color: #eee;
 }
 
-body.blog.dark .comments-form form .input-field label.active {
+.blog.dark .comments-form form .input-field label.active {
   color: #eee !important;
 }
 
-body.blog.dark .comments-form form .input-field input[type=text],
-body.blog.dark .comments-form form .input-field input[type=email],
-body.blog.dark .comments-form form .input-field textarea {
+.blog.dark .comments-form form .input-field input[type=text],
+.blog.dark .comments-form form .input-field input[type=email],
+.blog.dark .comments-form form .input-field textarea {
   color: #fff !important;
   border-bottom: 1px solid #555;
 }
 
-body.blog.dark .comments-heading,
-body.blog.dark .comments-list .comment-author,
-body.blog.dark .comments-list .comment-reply {
+.blog.dark .comments-heading,
+.blog.dark .comments-list .comment-author,
+.blog.dark .comments-list .comment-reply {
   color: #fff;
 }
 
-body.blog.dark .comments-list .comment-date {
+.blog.dark .comments-list .comment-date {
   color: #aaa;
 }
 
@@ -865,12 +865,12 @@ html:not(.lt-ie10) .not-animated {
 }
 
 .cd-stretchy-nav ul li:nth-of-type(4) a::after {
-  content: "\f0e6";
+  content: "\f09e";
   color: #000;
 }
 
 .cd-stretchy-nav ul li:nth-of-type(5) a::after {
-  content: "\f2c3";
+  content: "\f0e6";
   color: #000;
 }
 
@@ -1359,6 +1359,7 @@ div.container.page-title {
 #footer .social-media {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #footer .social-icon {
@@ -1389,11 +1390,8 @@ div.container.page-title {
 }
 
 #footer .legal-notice {
-  position: absolute;
+  position: fixed;
   right: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
 }
 
 #footer .legal-notice a {
@@ -1401,7 +1399,7 @@ div.container.page-title {
   padding: 0 10px;
 }
 
-@media (orientation:portrait) and (max-width: 1023px) {
+@media (orientation:portrait) and (max-width: 767px) {
   #footer .legal-notice {
     position: initial;
     display: flex;
@@ -1701,6 +1699,7 @@ body.light .personal-info ul h6 {
   justify-content: center;
   align-items: center;
   float: left;
+  border-radius: 5px;
 }
 
 .skill-picture ul li span {
@@ -2257,6 +2256,7 @@ section#blog p {
   margin: 0;
 }
 
+/* 
 section#blog .meta {
   clear: both;
   padding: 15px 0;
@@ -2274,7 +2274,7 @@ section#blog .meta span {
 section#blog .meta i {
   padding-right: 6px;
 }
-
+ */
 .allposts {
   text-align: center;
   margin-bottom: 70px;
@@ -2282,52 +2282,56 @@ section#blog .meta i {
 
 /*** Blog Page ***/
 
-body.blog .content {
+.blog.wrapper {
+  height: 100vh;
+}
+
+.blog .content {
   padding: 0 24px;
   margin: 0 auto;
   max-width: 700px;
 }
 
-body.blog .btn.back {
+.blog .btn.back {
   background: transparent;
   width: 100%;
   transition: .1s;
 }
 
-body.blog .btn.back:hover {
+.blog .btn.back:hover {
   color: #fff;
 }
 
-body.blog {
+.blog {
   background-color: #fff;
   overflow: auto;
 }
 
-body.blog .container-fluid.page-title {
-  background-repeat: no-repeat;
+.blog .container-fluid.page-title {
+  /* background-repeat: no-repeat;
   background-position: center top;
-  background-image: url('http://via.placeholder.com/1920x624');
+  background-image: url('http://via.placeholder.com/1920x624'); */
   padding: 0;
   margin-bottom: 60px;
 }
 
-body.blog .container-fluid.page-title .content-banner {
-  background-color: rgba(0, 0, 0, .8);
-  padding: 200px 30px;
+.blog .container-fluid.page-title .content-banner {
+  background: #222;
+  padding: 100px 150px;
   width: 100%;
   text-align: center;
 }
 
-body.blog .container-fluid.page-title .content-banner h2,
-body.blog .container-fluid.page-title .meta {
+.blog .container-fluid.page-title .content-banner h2,
+.blog .container-fluid.page-title .meta {
   color: #fff;
 }
 
-body.blog .container-fluid.page-title .meta {
+.blog .container-fluid.page-title .meta {
   background: rgba(0, 0, 0, .6) !important;
 }
 
-body.blog .container-fluid.page-title .content-banner h2 span {
+.blog .container-fluid.page-title .content-banner h2 span {
   color: #fff !important;
 }
 
@@ -2335,7 +2339,7 @@ body.blog .container-fluid.page-title .content-banner h2 span {
   background: transparent !important;
 }
 
-body.blog .container.page-title h2 {
+.blog .container.page-title h2 {
   font-size: 55px;
 }
 
@@ -2345,21 +2349,37 @@ body.blog .container.page-title h2 {
 
 /** Posts **/
 
-body.blog article {
+.blog-hint {
+  border: 1px solid #daa520;
+  border-radius: 5px;
+  padding: 20px;
+  color: #eee;
+}
+
+.blog .content hr {
+  background-color: #fff;
+  margin-bottom: 3rem;
+}
+
+.blog article {
   margin-bottom: 60px;
 }
 
-body.blog figure {
+.blog article .tags span {
+  margin-right: 5px;
+}
+
+.blog figure {
   margin: 0;
 }
 
-body.blog figure a img,
-body.blog figure img {
+.blog figure a img,
+.blog figure img {
   width: 100%;
   border-radius: 4px;
 }
 
-body.blog article h4 {
+.blog article h4 {
   color: #555;
   text-transform: uppercase;
   font-weight: 600;
@@ -2367,21 +2387,52 @@ body.blog article h4 {
   margin: 0 0 24px;
 }
 
-body.blog .readmore.btn {
+.blog .readmore.btn {
   margin: 24px 0;
 }
 
-body.blog p {
+.blog .blog-excerpt {
+  margin-top: 20px;
+}
+
+.blog .blog-excerpt.post img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog .blog-excerpt.post h5 {
+  color: #eee;
+  margin: 1.5rem 0;
+}
+
+.blog .blog-excerpt.post a {
+  color: #daa520;
+}
+
+.blog .blog-excerpt.post ul {
+  list-style-type: disc;
+  margin: 20px 0 20px 40px;
+}
+
+.blog .blog-excerpt.post li {
+  color: #eee;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 2;
+}
+
+
+.blog p {
   line-height: 2;
   margin: 20px 0 0;
   font-family: 'Open Sans', sans-serif;
 }
 
-body.blog .meta-post-content {
+.blog .meta-post-content {
   margin: 20px 0;
 }
 
-body.blog .meta {
+.blog .meta {
   clear: both;
   padding: 15px 30px;
   font-size: 14px;
@@ -2390,14 +2441,21 @@ body.blog .meta {
   display: inline-block;
   margin-top: 25px;
   background: #eee !important;
+  width: 100%;
+  max-width: 100%;
 }
 
-body.blog .meta span {
+.blog .content-banner .meta {
+  max-width: initial;
+  width: initial;
+}
+
+.blog .meta span {
   margin-right: 15px;
   display: inline-block;
 }
 
-body.blog .meta i {
+.blog .meta i {
   padding-right: 6px;
 }
 
@@ -3454,7 +3512,7 @@ ul.social-intro li a:hover i {
     padding: 0 24px;
   }
 
-  body.blog article h4,
+  .blog article h4,
   .comments-heading {
     font-size: 20px;
   }
