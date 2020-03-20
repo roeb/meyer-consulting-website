@@ -1389,6 +1389,11 @@ div.container.page-title {
   mask: url('../icons/xing.svg') no-repeat center;
 }
 
+#footer .social-icon.keybase {
+  -webkit-mask: url('../icons/keybase.svg') no-repeat center;
+  mask: url('../icons/keybase.svg') no-repeat center;
+}
+
 #footer .legal-notice {
   position: fixed;
   right: 0;
