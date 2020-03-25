@@ -1398,6 +1398,11 @@ div.container.page-title {
   mask: url('../icons/keybase.svg') no-repeat center;
 }
 
+#footer .social-icon.rss {
+  -webkit-mask: url('../icons/rss.svg') no-repeat center;
+  mask: url('../icons/rss.svg') no-repeat center;
+}
+
 #footer .legal-notice {
   position: fixed;
   right: 0;
@@ -2370,6 +2375,7 @@ section#blog .meta i {
 .blog .content hr {
   background-color: #fff;
   margin-bottom: 3rem;
+  opacity: 0.3;
 }
 
 .blog article {

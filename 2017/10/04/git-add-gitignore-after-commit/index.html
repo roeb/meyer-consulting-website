@@ -24,21 +24,22 @@
     <script src="/assets/js/modernizr.js"></script>
 
     <!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Robert Meyer Consulting | Trainer for Mircosoft Azure and Identity/Security. Development from Cloud and Web Solutions.</title>
+<title>Git: Add .gitignore after commit | Robert Meyer Consulting</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Robert Meyer Consulting" />
+<meta property="og:title" content="Git: Add .gitignore after commit" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Trainer for Mircosoft Azure and Identity/Security. Development from Cloud and Web Solutions." />
-<meta property="og:description" content="Trainer for Mircosoft Azure and Identity/Security. Development from Cloud and Web Solutions." />
-<link rel="canonical" href="meyer-consulting.net/contact.html" />
-<meta property="og:url" content="meyer-consulting.net/contact.html" />
+<meta name="description" content="I had created a new repository in GitHub and forgot to add the .gitignore file to ignore all my Visual Studio and debugging files. However, I did not realize it until after I created the first commit." />
+<meta property="og:description" content="I had created a new repository in GitHub and forgot to add the .gitignore file to ignore all my Visual Studio and debugging files. However, I did not realize it until after I created the first commit." />
+<link rel="canonical" href="meyer-consulting.net/2017/10/04/git-add-gitignore-after-commit/" />
+<meta property="og:url" content="meyer-consulting.net/2017/10/04/git-add-gitignore-after-commit/" />
 <meta property="og:site_name" content="Robert Meyer Consulting" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-10-04T00:21:30-05:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Robert Meyer Consulting" />
+<meta property="twitter:title" content="Git: Add .gitignore after commit" />
 <meta name="twitter:site" content="@roeb" />
-<meta name="twitter:creator" content="@roeb" />
 <script type="application/ld+json">
-{"description":"Trainer for Mircosoft Azure and Identity/Security. Development from Cloud and Web Solutions.","@type":"WebPage","url":"meyer-consulting.net/contact.html","headline":"Robert Meyer Consulting","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"meyer-consulting.net/2017/10/04/git-add-gitignore-after-commit/"},"description":"I had created a new repository in GitHub and forgot to add the .gitignore file to ignore all my Visual Studio and debugging files. However, I did not realize it until after I created the first commit.","@type":"BlogPosting","url":"meyer-consulting.net/2017/10/04/git-add-gitignore-after-commit/","headline":"Git: Add .gitignore after commit","dateModified":"2017-10-04T00:21:30-05:00","datePublished":"2017-10-04T00:21:30-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -88,54 +89,95 @@
         <main id="main">
             <span class="back-mobile" id="back-mobile"><i class="fa fa-arrow-left"></i></span>
 
-            <section id="contact" class="active">
-    <div class="contact-container">
-        <!-- Main Heading Starts -->
-        <div class="container page-title text-center">
-            <h2 class="text-center">get <span>in touch</span></h2>
-            <span class="title-head-subtitle">I’m always open for new ideas and challenges.</span>
-        </div>
-        <!-- Main Heading Ends -->
-        <div class="container">
-            <div class="row contact">
-                <!-- Contact Infos Starts -->
-                <div class="col-12 col-md-8 col-xl-8 rightside">
-                    <p>
-                        Are you interested in training, consulting or do you need support in implementing an idea? Please fill out the form below and I will reply you shortly.
-                    </p>
-                    <form class="contactform" method="post" action="https://getform.io/f/1c5df857-f59e-450f-9f0c-928a4e4f5257">
-                        <div class="row">
-                            <!-- Name Field Starts -->
-                            <div class="form-group col-xl-6"> <i class="fa fa-user prefix"></i>
-                                <input id="name" name="name" type="text" class="form-control" placeholder="YOUR NAME" required>
-                            </div>
-                            <!-- Name Field Ends -->
-                            <!-- Email Field Starts -->
-                            <div class="form-group col-xl-6"> <i class="fa fa-envelope prefix"></i>
-                                <input id="email" type="email" name="email" class="form-control" placeholder="YOUR EMAIL" required>
-                            </div>
-                            <!-- Email Field Ends -->
-                            <!-- Comment Textarea Starts -->
-                            <div class="form-group col-xl-12"> <i class="fa fa-comments prefix"></i>
-                                <textarea id="comment" name="comment" class="form-control" placeholder="YOUR MESSAGE" required></textarea>
-                            </div>
-                            <!-- Comment Textarea Ends -->
-                        </div>
-                        <!-- Submit Form Button Starts -->
-                        <div class="submit-form">
-                            <button class="btn button-animated" type="submit" name="send"><span><i class="fa fa-send"></i> Send Message</span></button>
-                        </div>
-                        <!-- Submit Form Button Ends -->
-                        <div class="form-message"> <span class="output_message text-center font-weight-600 uppercase"></span>
-                        </div>
-                    </form>
-                </div>
-                <!-- Contact Form Ends -->
+            <!-- <h1>Git: Add .gitignore after commit</h1>
+<p>04 Oct 2017 - {"login"=>"sqlpractice", "email"=>"info@meyer-consulting.net", "display_name"=>"Robert Meyer", "first_name"=>"Robert", "last_name"=>"Meyer"}</p>
 
+<p>I had created a new repository in GitHub and forgot to add the .gitignore file to ignore all my Visual Studio and debugging files. However, I did not realize it until after I created the first commit.</p>
+
+<p>These are the steps to apply the gitignore file later:</p>
+
+<ol>
+  <li>Create a .gitignore file in the root of your local repository. Run this command. This removes everything from the index:
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">rm</span> <span class="nt">-r</span> <span class="nt">--cached</span> <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Re-add all files. Now the files and folders from gitignore are ignored.
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Then commit the changes again and push it to your GitHub repository
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">".gitignore is now working"</span>
+git push
+</code></pre></div>    </div>
+  </li>
+</ol>
+ -->
+<div class="dark blog wrapper">
+    <div class="container-fluid page-title post-title">
+        <div class="content-banner">
+            <h2 class="text-center">
+                <span>Git: Add .gitignore after commit</span>
+            </h2>
+            <div class="meta">
+                <span><i class="fa fa-user"></i> <a href="#">Robert Meyer</a></span>
+                <span class="date"><i class="fa fa-calendar"></i>04 Oct 2017</span>
+                <!-- <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span> -->
+                <span><i class="fa fa-tags"></i>
+                    
+                    <span>GitHub</span>
+                    
+                    <span>gitignore</span>
+                    
+                </span>
+                <span class="permalink"><i class="fa fa-link"></i> <a href="/2017/10/04/git-add-gitignore-after-commit/">permalink</a></span>
             </div>
         </div>
     </div>
-</section>
+    <div class="container">
+        <div class="row">
+            <div class="content">
+                <!-- Article Starts -->
+                <article>
+                    <!-- Excerpt Starts -->
+                    <div class="blog-excerpt post">
+                        <p>I had created a new repository in GitHub and forgot to add the .gitignore file to ignore all my Visual Studio and debugging files. However, I did not realize it until after I created the first commit.</p>
+
+<p>These are the steps to apply the gitignore file later:</p>
+
+<ol>
+  <li>Create a .gitignore file in the root of your local repository. Run this command. This removes everything from the index:
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="nb">rm</span> <span class="nt">-r</span> <span class="nt">--cached</span> <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Re-add all files. Now the files and folders from gitignore are ignored.
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add <span class="nb">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Then commit the changes again and push it to your GitHub repository
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">".gitignore is now working"</span>
+git push
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+                        <!-- Meta Starts -->
+                        <!--   <div class="meta meta-post-content">
+                            <span><i class="fa fa-user"></i> <a href="#">admin</a></span>
+                            <span class="date"><i class="fa fa-calendar"></i> 9 January 2017</span>
+                            <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span>
+                            <span><i class="fa fa-tags"></i> js, php, html</span>
+                            <span class="permalink"><i class="fa fa-link"></i> <a href="/2017/10/04/git-add-gitignore-after-commit/">permalink</a></span>
+                        </div> -->
+                        <!-- Meta Ends -->
+                    </div>
+                    <!-- Excerpt Ends -->
+                    <!-- Comments Starts -->
+                </article>
+                <!-- Article Ends -->
+            </div>
+        </div>
+    </div>
+</div>
         </main>
         <footer id="footer">
             <style>
