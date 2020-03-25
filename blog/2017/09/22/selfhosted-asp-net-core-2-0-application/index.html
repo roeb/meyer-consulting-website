@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Robert Meyer Consulting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/Logo.ico">
+
+    <!-- Template Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Template CSS Files -->
+    <link type="text/css" media="all" href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/jquery.animatedheadline.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/style.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/skins/goldrenrod.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/rougify-github.css" rel="stylesheet">
+
+    <!-- Template JS Files -->
+    <script src="/assets/js/modernizr.js"></script>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SelfHosted ASP.NET Core 2.0 Application | Robert Meyer Consulting</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SelfHosted ASP.NET Core 2.0 Application" />
+<meta name="author" content="Robert Meyer" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Auf Grund einer Projektanforderung musste ich mich die Tage damit auseinandersetzen, wie man eine ASP.NET Core 2.0 Website und Web API in einem eigenen Prozess als Windows Service bereitstellt." />
+<meta property="og:description" content="Auf Grund einer Projektanforderung musste ich mich die Tage damit auseinandersetzen, wie man eine ASP.NET Core 2.0 Website und Web API in einem eigenen Prozess als Windows Service bereitstellt." />
+<link rel="canonical" href="https://meyer-consulting.net/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/" />
+<meta property="og:url" content="https://meyer-consulting.net/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/" />
+<meta property="og:site_name" content="Robert Meyer Consulting" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-22T03:40:14-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SelfHosted ASP.NET Core 2.0 Application" />
+<meta name="twitter:site" content="@roeb" />
+<meta name="twitter:creator" content="@Robert Meyer" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Robert Meyer"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://meyer-consulting.net/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/"},"description":"Auf Grund einer Projektanforderung musste ich mich die Tage damit auseinandersetzen, wie man eine ASP.NET Core 2.0 Website und Web API in einem eigenen Prozess als Windows Service bereitstellt.","@type":"BlogPosting","url":"https://meyer-consulting.net/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/","headline":"SelfHosted ASP.NET Core 2.0 Application","dateModified":"2017-09-22T03:40:14-05:00","datePublished":"2017-09-22T03:40:14-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-160199639-1', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+<body class="dark fullscreendark">
+    <div class="page">
+        <div class="stretchy-nav-background"></div>
+        <!-- Header Starts -->
+        <header id="header">
+            <!-- Stretchy Navigation Starts -->
+            <div class="cd-stretchy-nav">
+    <a class="cd-nav-trigger" href="#0">
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="stretchy-nav">
+        
+        <li ><a href="/"><span>Home</span></a></li>
+        
+        <li ><a href="/about"><span>About</span></a></li>
+        
+        <li ><a href="/services"><span>My Services</span></a></li>
+        
+        <li ><a href="/blog"><span>Blog</span></a></li>
+        
+        <li ><a href="/contact"><span>Contact</span></a></li>
+        
+    </ul>
+    <span aria-hidden="true" class="stretchy-nav-bg"></span>
+</div>
+            <!-- Stretchy Navigation Ends -->
+        </header>
+        <!-- Header Ends -->
+        <!-- Main Content Starts -->
+        <main id="main">
+            <span class="back-mobile" id="back-mobile"><i class="fa fa-arrow-left"></i></span>
+
+            <!-- <h1>SelfHosted ASP.NET Core 2.0 Application</h1>
+<p>22 Sep 2017 - Robert Meyer</p>
+
+<p>Auf Grund einer Projektanforderung musste ich mich die Tage damit auseinandersetzen, wie man eine ASP.NET Core 2.0 Website und Web API in einem eigenen Prozess als Windows Service bereitstellt.</p>
+
+<p>Hierbei gibt es einige Besonderheiten zu beachten, auf welche ich in diesem Post gern näher eingehen möchte.</p>
+
+<p>Folgende Technologien kommen zum Einsatz:</p>
+
+<ul>
+  <li>Alle Projekte basieren auf .NET Core 2.0 oder .NET Standard 2.0</li>
+  <li>Autofac als IoC Container</li>
+  <li>NLog für das Logging</li>
+  <li>Peter Kottas WindowsService als ServerFabric (<a href="https://github.com/PeterKottas/DotNetCore.WindowsService" target="_blank" rel="noopener">GitHub</a>)</li>
+</ul>
+
+<h5 id="grundlegende-architektur-der-anwendung">Grundlegende Architektur der Anwendung</h5>
+<p><img class=" size-full wp-image-349 aligncenter" src="/assets/img/blog/2017/architecture.png" alt="Architecture" width="790" height="200" /></p>
+<p>Zu finden ist dieses Beispiel auf <a href="https://github.com/roeb/DotNetCoreSamples" target="_blank" rel="noopener">GitHub</a>.</p>
+
+<h5>Grundlegendes Vorgehen</h5>
+<p>Die Konsolenapplikation kann als WindowsService oder direkt ausgeführt werden und hostet die Website und die API. Die Website und die API sind beides .NETStandard 2.0 Projekte, während die Console eine .NET Core 2.0 Anwendung darstellt.</p>
+
+<h5>Aufbau der SelfHosted.Console</h5>
+<p>IApplication definiert ein Interface zum Starten und Stoppen der Applikationen. Eine Applikation kann eine Website oder eine WebApi sein.</p>
+<p><img class=" size-full wp-image-357 aligncenter" src="/assets/img/blog/2017/iapplication.png" alt="IApplication" width="429" height="208" /></p>
+<p>Diese Applikationen werden in Autofac registriert und einem gekapselten MicroService geladen und gestartet.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SelfHostedWindowService</span> <span class="p">:</span> <span class="n">MicroService</span><span class="p">,</span> <span class="n">IMicroService</span>
+<span class="p">{</span>
+	<span class="k">private</span> <span class="n">IServiceProvider</span> <span class="n">_provider</span><span class="p">;</span>
+
+	<span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nf">StartBase</span><span class="p">();</span>
+
+		<span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ContainerBuilder</span><span class="p">();</span>
+		<span class="n">builder</span><span class="p">.</span><span class="n">RegisterType</span><span class="p">&lt;</span><span class="n">WebApplication</span><span class="p">&gt;().</span><span class="n">As</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;();</span>
+		<span class="n">builder</span><span class="p">.</span><span class="n">RegisterType</span><span class="p">&lt;</span><span class="n">WebApiApplication</span><span class="p">&gt;().</span><span class="n">As</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;();</span>
+		<span class="kt">var</span> <span class="n">applicationContainer</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Build</span><span class="p">();</span>
+
+		<span class="n">_provider</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AutofacServiceProvider</span><span class="p">(</span><span class="n">applicationContainer</span><span class="p">);</span>
+
+		<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">app</span> <span class="k">in</span> <span class="n">_provider</span><span class="p">.</span><span class="n">GetServices</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;())</span>
+		<span class="p">{</span>
+			<span class="n">app</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+		<span class="p">}</span>
+
+		<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Windows services started."</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">public</span> <span class="k">void</span> <span class="nf">Stop</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nf">StopBase</span><span class="p">();</span>
+
+		<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">app</span> <span class="k">in</span> <span class="n">_provider</span><span class="p">.</span><span class="n">GetServices</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;())</span>
+		<span class="p">{</span>
+			<span class="n">app</span><span class="p">.</span><span class="nf">Stop</span><span class="p">();</span>
+		<span class="p">}</span>
+
+		<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Windows services stopped."</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Beim Starten der Konsole oder des Services, wird der MicroService registriert und in einer ServiceFactory geladen. Dadurch starten alle Applikationen, welche in den jeweiligen MicroService definiert sind.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ServiceRunner</span><span class="p">&lt;</span><span class="n">SelfHostedWindowService</span><span class="p">&gt;.</span><span class="nf">Run</span><span class="p">(</span><span class="n">config</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">serviceName</span> <span class="p">=</span> <span class="s">"SelfHosted.WindowsService"</span><span class="p">;</span>
+
+	<span class="n">config</span><span class="p">.</span><span class="nf">SetName</span><span class="p">(</span><span class="n">serviceName</span><span class="p">);</span>
+	<span class="n">config</span><span class="p">.</span><span class="nf">Service</span><span class="p">(</span><span class="n">serviceConfig</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">ServiceFactory</span><span class="p">((</span><span class="n">service</span><span class="p">,</span> <span class="n">extraArguments</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="k">return</span> <span class="k">new</span> <span class="nf">SelfHostedWindowService</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnStart</span><span class="p">((</span><span class="n">service</span><span class="p">,</span> <span class="n">extraArguments</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Service {0} started"</span><span class="p">,</span> <span class="n">serviceName</span><span class="p">);</span>
+			<span class="n">service</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnStop</span><span class="p">((</span><span class="n">service</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Service {0} stopped"</span><span class="p">,</span> <span class="n">serviceName</span><span class="p">);</span>
+			<span class="n">service</span><span class="p">.</span><span class="nf">Stop</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnError</span><span class="p">(</span><span class="n">e</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Service '</span><span class="p">{</span><span class="n">serviceName</span><span class="p">}</span><span class="s">' errored with exception : </span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+		<span class="p">});</span>
+	<span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h5>Besonderheiten in der ASP.NET Core 2.0 Website</h5>
+<p>Es gibt jedoch beim hosten seiner ASP.NET Core 2.0 Website in einer Console noch drei wichtige Dinge zu beachten.</p>
+
+<ol>
+  <li>Alle Views müssen Embedded werden. Dafür habe ich folgende Extension Methode geschrieben, welche im Startup bei AddRazorOptions aufgerufen wird.<br /></li>
+</ol>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">RazorViewEngineOptions</span> <span class="nf">AddViews</span><span class="p">(</span><span class="k">this</span> <span class="n">RazorViewEngineOptions</span> <span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">options</span><span class="p">.</span><span class="n">FileProviders</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">EmbeddedFileProvider</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ServiceCollectionExtensions</span><span class="p">).</span><span class="nf">GetTypeInfo</span><span class="p">().</span><span class="n">Assembly</span><span class="p">,</span> <span class="s">"SelfHosted.Website"</span><span class="p">));</span>
+	<span class="k">return</span> <span class="n">options</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>2. Danach stellte sich heraus, dass noch einige Assemblies fehlten. Diese werden ebenfalls per Extension Methode im Startup geladen.<br /></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">RazorViewEngineOptions</span> <span class="nf">AddCompilationAssemblies</span><span class="p">(</span><span class="k">this</span> <span class="n">RazorViewEngineOptions</span> <span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">myAssemblies</span> <span class="p">=</span> <span class="n">AppDomain</span>
+	<span class="p">.</span><span class="n">CurrentDomain</span>
+	<span class="p">.</span><span class="nf">GetAssemblies</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">!</span><span class="n">x</span><span class="p">.</span><span class="n">IsDynamic</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">Concat</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="c1">// additional assemblies used in Razor pages:</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">HtmlString</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="c1">// Microsoft.AspNetCore.Html.Abstractions</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">IViewLocalizer</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="c1">// Microsoft.AspNetCore.Mvc.Localization</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">IRequestCultureFeature</span><span class="p">).</span><span class="n">Assembly</span> <span class="c1">// Microsoft.AspNetCore.Localization</span>
+	<span class="p">})</span>
+	<span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">MetadataReference</span><span class="p">.</span><span class="nf">CreateFromFile</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">Location</span><span class="p">))</span>
+	<span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+
+	<span class="kt">var</span> <span class="n">previous</span> <span class="p">=</span> <span class="n">options</span><span class="p">.</span><span class="n">CompilationCallback</span><span class="p">;</span>
+
+	<span class="n">options</span><span class="p">.</span><span class="n">CompilationCallback</span> <span class="p">=</span> <span class="n">context</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">previous</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">Compilation</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Compilation</span><span class="p">.</span><span class="nf">AddReferences</span><span class="p">(</span><span class="n">myAssemblies</span><span class="p">);</span>
+	<span class="p">};</span>
+
+	<span class="k">return</span> <span class="n">options</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Jetzt müssen noch alle statischen Files, welche z.B. im wwwroot liegen embedded werden. Auch hier gibt es wieder eine passende Extension Methode.<br /></li>
+</ol>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">IServiceCollection</span> <span class="nf">AddStaticFiles</span><span class="p">(</span><span class="k">this</span> <span class="n">IServiceCollection</span> <span class="n">collection</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// static files are embedded resources in the "wwwroot" folder</span>
+	<span class="n">collection</span><span class="p">.</span><span class="n">Configure</span><span class="p">&lt;</span><span class="n">StaticFileOptions</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">options</span><span class="p">.</span><span class="n">FileProvider</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EmbeddedFileProvider</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Startup</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Startup</span><span class="p">).</span><span class="n">Namespace</span> <span class="p">+</span> <span class="s">".wwwroot"</span><span class="p">);</span>
+	<span class="p">});</span>
+	<span class="k">return</span> <span class="n">collection</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Aufgerufen werden die Extension Methods im Startup der Website, in der Funktion ConfigureServices wie folgt:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">IServiceProvider</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">IConfiguration</span><span class="p">&gt;(</span><span class="n">Configuration</span><span class="p">);</span>
+	<span class="n">services</span><span class="p">.</span><span class="nf">AddMvc</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">AddRazorOptions</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">options</span><span class="p">.</span><span class="nf">AddViews</span><span class="p">();</span>
+		<span class="n">options</span><span class="p">.</span><span class="nf">AddCompilationAssemblies</span><span class="p">();</span>
+	<span class="p">});</span>
+	<span class="n">services</span><span class="p">.</span><span class="nf">AddStaticFiles</span><span class="p">();</span>
+
+	<span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ContainerBuilder</span><span class="p">();</span>
+	<span class="n">builder</span><span class="p">.</span><span class="nf">Populate</span><span class="p">(</span><span class="n">services</span><span class="p">);</span>
+	<span class="k">this</span><span class="p">.</span><span class="n">ApplicationContainer</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Build</span><span class="p">();</span>
+
+	<span class="k">return</span> <span class="k">new</span> <span class="nf">AutofacServiceProvider</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">ApplicationContainer</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5>Zusammenfassung</h5>
+<p>Auf diesem Weg erreicht man eine sehr leichtgewichtige Anwendung, welche komplett in einem eigenen Prozess unabhängig von dem Betriebssystem und Webserver installiert werden kann. Somit erreicht man bei seiner Produktentwicklung, welchen bei Kunden vor Ort installiert werden muss, eine sehr hohe Flexibilität und ich unabhängig der Umgebung.</p>
+ -->
+<div class="dark blog wrapper">
+    <div class="container-fluid page-title post-title">
+        <div class="content-banner">
+            <h2 class="text-center">
+                <span>SelfHosted ASP.NET Core 2.0 Application</span>
+            </h2>
+            <div class="meta">
+                <span><i class="fa fa-user"></i> <a href="#">Robert Meyer</a></span>
+                <span class="date"><i class="fa fa-calendar"></i>22 Sep 2017</span>
+                <!-- <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span> -->
+                <span><i class="fa fa-tags"></i>
+                    
+                    <span>.NET Core</span>
+                    
+                    <span>.NET Standard</span>
+                    
+                    <span>Autofac</span>
+                    
+                    <span>NLog</span>
+                    
+                    <span>SelfHosted Website</span>
+                    
+                    <span>ServerFabric</span>
+                    
+                    <span>Windows Service</span>
+                    
+                </span>
+                <span class="permalink"><i class="fa fa-link"></i> <a href="/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/">permalink</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="content">
+                <!-- Article Starts -->
+                <article>
+                    <!-- Excerpt Starts -->
+                    <div class="blog-excerpt post">
+                        <p>Auf Grund einer Projektanforderung musste ich mich die Tage damit auseinandersetzen, wie man eine ASP.NET Core 2.0 Website und Web API in einem eigenen Prozess als Windows Service bereitstellt.</p>
+
+<p>Hierbei gibt es einige Besonderheiten zu beachten, auf welche ich in diesem Post gern näher eingehen möchte.</p>
+
+<p>Folgende Technologien kommen zum Einsatz:</p>
+
+<ul>
+  <li>Alle Projekte basieren auf .NET Core 2.0 oder .NET Standard 2.0</li>
+  <li>Autofac als IoC Container</li>
+  <li>NLog für das Logging</li>
+  <li>Peter Kottas WindowsService als ServerFabric (<a href="https://github.com/PeterKottas/DotNetCore.WindowsService" target="_blank" rel="noopener">GitHub</a>)</li>
+</ul>
+
+<h5 id="grundlegende-architektur-der-anwendung">Grundlegende Architektur der Anwendung</h5>
+<p><img class=" size-full wp-image-349 aligncenter" src="/assets/img/blog/2017/architecture.png" alt="Architecture" width="790" height="200" /></p>
+<p>Zu finden ist dieses Beispiel auf <a href="https://github.com/roeb/DotNetCoreSamples" target="_blank" rel="noopener">GitHub</a>.</p>
+
+<h5>Grundlegendes Vorgehen</h5>
+<p>Die Konsolenapplikation kann als WindowsService oder direkt ausgeführt werden und hostet die Website und die API. Die Website und die API sind beides .NETStandard 2.0 Projekte, während die Console eine .NET Core 2.0 Anwendung darstellt.</p>
+
+<h5>Aufbau der SelfHosted.Console</h5>
+<p>IApplication definiert ein Interface zum Starten und Stoppen der Applikationen. Eine Applikation kann eine Website oder eine WebApi sein.</p>
+<p><img class=" size-full wp-image-357 aligncenter" src="/assets/img/blog/2017/iapplication.png" alt="IApplication" width="429" height="208" /></p>
+<p>Diese Applikationen werden in Autofac registriert und einem gekapselten MicroService geladen und gestartet.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">class</span> <span class="nc">SelfHostedWindowService</span> <span class="p">:</span> <span class="n">MicroService</span><span class="p">,</span> <span class="n">IMicroService</span>
+<span class="p">{</span>
+	<span class="k">private</span> <span class="n">IServiceProvider</span> <span class="n">_provider</span><span class="p">;</span>
+
+	<span class="k">public</span> <span class="k">void</span> <span class="nf">Start</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nf">StartBase</span><span class="p">();</span>
+
+		<span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ContainerBuilder</span><span class="p">();</span>
+		<span class="n">builder</span><span class="p">.</span><span class="n">RegisterType</span><span class="p">&lt;</span><span class="n">WebApplication</span><span class="p">&gt;().</span><span class="n">As</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;();</span>
+		<span class="n">builder</span><span class="p">.</span><span class="n">RegisterType</span><span class="p">&lt;</span><span class="n">WebApiApplication</span><span class="p">&gt;().</span><span class="n">As</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;();</span>
+		<span class="kt">var</span> <span class="n">applicationContainer</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Build</span><span class="p">();</span>
+
+		<span class="n">_provider</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">AutofacServiceProvider</span><span class="p">(</span><span class="n">applicationContainer</span><span class="p">);</span>
+
+		<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">app</span> <span class="k">in</span> <span class="n">_provider</span><span class="p">.</span><span class="n">GetServices</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;())</span>
+		<span class="p">{</span>
+			<span class="n">app</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+		<span class="p">}</span>
+
+		<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Windows services started."</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="k">public</span> <span class="k">void</span> <span class="nf">Stop</span><span class="p">()</span>
+	<span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nf">StopBase</span><span class="p">();</span>
+
+		<span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">app</span> <span class="k">in</span> <span class="n">_provider</span><span class="p">.</span><span class="n">GetServices</span><span class="p">&lt;</span><span class="n">IApplication</span><span class="p">&gt;())</span>
+		<span class="p">{</span>
+			<span class="n">app</span><span class="p">.</span><span class="nf">Stop</span><span class="p">();</span>
+		<span class="p">}</span>
+
+		<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Windows services stopped."</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Beim Starten der Konsole oder des Services, wird der MicroService registriert und in einer ServiceFactory geladen. Dadurch starten alle Applikationen, welche in den jeweiligen MicroService definiert sind.</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ServiceRunner</span><span class="p">&lt;</span><span class="n">SelfHostedWindowService</span><span class="p">&gt;.</span><span class="nf">Run</span><span class="p">(</span><span class="n">config</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">serviceName</span> <span class="p">=</span> <span class="s">"SelfHosted.WindowsService"</span><span class="p">;</span>
+
+	<span class="n">config</span><span class="p">.</span><span class="nf">SetName</span><span class="p">(</span><span class="n">serviceName</span><span class="p">);</span>
+	<span class="n">config</span><span class="p">.</span><span class="nf">Service</span><span class="p">(</span><span class="n">serviceConfig</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">ServiceFactory</span><span class="p">((</span><span class="n">service</span><span class="p">,</span> <span class="n">extraArguments</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="k">return</span> <span class="k">new</span> <span class="nf">SelfHostedWindowService</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnStart</span><span class="p">((</span><span class="n">service</span><span class="p">,</span> <span class="n">extraArguments</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Service {0} started"</span><span class="p">,</span> <span class="n">serviceName</span><span class="p">);</span>
+			<span class="n">service</span><span class="p">.</span><span class="nf">Start</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnStop</span><span class="p">((</span><span class="n">service</span><span class="p">)</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">"Service {0} stopped"</span><span class="p">,</span> <span class="n">serviceName</span><span class="p">);</span>
+			<span class="n">service</span><span class="p">.</span><span class="nf">Stop</span><span class="p">();</span>
+		<span class="p">});</span>
+
+		<span class="n">serviceConfig</span><span class="p">.</span><span class="nf">OnError</span><span class="p">(</span><span class="n">e</span> <span class="p">=&gt;</span>
+		<span class="p">{</span>
+			<span class="n">System</span><span class="p">.</span><span class="n">Console</span><span class="p">.</span><span class="nf">WriteLine</span><span class="p">(</span><span class="s">$"Service '</span><span class="p">{</span><span class="n">serviceName</span><span class="p">}</span><span class="s">' errored with exception : </span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">Message</span><span class="p">}</span><span class="s">"</span><span class="p">);</span>
+		<span class="p">});</span>
+	<span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h5>Besonderheiten in der ASP.NET Core 2.0 Website</h5>
+<p>Es gibt jedoch beim hosten seiner ASP.NET Core 2.0 Website in einer Console noch drei wichtige Dinge zu beachten.</p>
+
+<ol>
+  <li>Alle Views müssen Embedded werden. Dafür habe ich folgende Extension Methode geschrieben, welche im Startup bei AddRazorOptions aufgerufen wird.<br /></li>
+</ol>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">RazorViewEngineOptions</span> <span class="nf">AddViews</span><span class="p">(</span><span class="k">this</span> <span class="n">RazorViewEngineOptions</span> <span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">options</span><span class="p">.</span><span class="n">FileProviders</span><span class="p">.</span><span class="nf">Add</span><span class="p">(</span><span class="k">new</span> <span class="nf">EmbeddedFileProvider</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">ServiceCollectionExtensions</span><span class="p">).</span><span class="nf">GetTypeInfo</span><span class="p">().</span><span class="n">Assembly</span><span class="p">,</span> <span class="s">"SelfHosted.Website"</span><span class="p">));</span>
+	<span class="k">return</span> <span class="n">options</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>2. Danach stellte sich heraus, dass noch einige Assemblies fehlten. Diese werden ebenfalls per Extension Methode im Startup geladen.<br /></p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">RazorViewEngineOptions</span> <span class="nf">AddCompilationAssemblies</span><span class="p">(</span><span class="k">this</span> <span class="n">RazorViewEngineOptions</span> <span class="n">options</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">var</span> <span class="n">myAssemblies</span> <span class="p">=</span> <span class="n">AppDomain</span>
+	<span class="p">.</span><span class="n">CurrentDomain</span>
+	<span class="p">.</span><span class="nf">GetAssemblies</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">!</span><span class="n">x</span><span class="p">.</span><span class="n">IsDynamic</span><span class="p">)</span>
+	<span class="p">.</span><span class="nf">Concat</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="c1">// additional assemblies used in Razor pages:</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">HtmlString</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="c1">// Microsoft.AspNetCore.Html.Abstractions</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">IViewLocalizer</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="c1">// Microsoft.AspNetCore.Mvc.Localization</span>
+		<span class="k">typeof</span><span class="p">(</span><span class="n">IRequestCultureFeature</span><span class="p">).</span><span class="n">Assembly</span> <span class="c1">// Microsoft.AspNetCore.Localization</span>
+	<span class="p">})</span>
+	<span class="p">.</span><span class="nf">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">MetadataReference</span><span class="p">.</span><span class="nf">CreateFromFile</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">Location</span><span class="p">))</span>
+	<span class="p">.</span><span class="nf">ToArray</span><span class="p">();</span>
+
+	<span class="kt">var</span> <span class="n">previous</span> <span class="p">=</span> <span class="n">options</span><span class="p">.</span><span class="n">CompilationCallback</span><span class="p">;</span>
+
+	<span class="n">options</span><span class="p">.</span><span class="n">CompilationCallback</span> <span class="p">=</span> <span class="n">context</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">previous</span><span class="p">?.</span><span class="nf">Invoke</span><span class="p">(</span><span class="n">context</span><span class="p">);</span>
+		<span class="n">context</span><span class="p">.</span><span class="n">Compilation</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">Compilation</span><span class="p">.</span><span class="nf">AddReferences</span><span class="p">(</span><span class="n">myAssemblies</span><span class="p">);</span>
+	<span class="p">};</span>
+
+	<span class="k">return</span> <span class="n">options</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Jetzt müssen noch alle statischen Files, welche z.B. im wwwroot liegen embedded werden. Auch hier gibt es wieder eine passende Extension Methode.<br /></li>
+</ol>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">static</span> <span class="n">IServiceCollection</span> <span class="nf">AddStaticFiles</span><span class="p">(</span><span class="k">this</span> <span class="n">IServiceCollection</span> <span class="n">collection</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// static files are embedded resources in the "wwwroot" folder</span>
+	<span class="n">collection</span><span class="p">.</span><span class="n">Configure</span><span class="p">&lt;</span><span class="n">StaticFileOptions</span><span class="p">&gt;(</span><span class="n">options</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">options</span><span class="p">.</span><span class="n">FileProvider</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">EmbeddedFileProvider</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Startup</span><span class="p">).</span><span class="n">Assembly</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Startup</span><span class="p">).</span><span class="n">Namespace</span> <span class="p">+</span> <span class="s">".wwwroot"</span><span class="p">);</span>
+	<span class="p">});</span>
+	<span class="k">return</span> <span class="n">collection</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Aufgerufen werden die Extension Methods im Startup der Website, in der Funktion ConfigureServices wie folgt:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="n">IServiceProvider</span> <span class="nf">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">services</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">IConfiguration</span><span class="p">&gt;(</span><span class="n">Configuration</span><span class="p">);</span>
+	<span class="n">services</span><span class="p">.</span><span class="nf">AddMvc</span><span class="p">()</span>
+	<span class="p">.</span><span class="nf">AddRazorOptions</span><span class="p">(</span><span class="n">options</span> <span class="p">=&gt;</span>
+	<span class="p">{</span>
+		<span class="n">options</span><span class="p">.</span><span class="nf">AddViews</span><span class="p">();</span>
+		<span class="n">options</span><span class="p">.</span><span class="nf">AddCompilationAssemblies</span><span class="p">();</span>
+	<span class="p">});</span>
+	<span class="n">services</span><span class="p">.</span><span class="nf">AddStaticFiles</span><span class="p">();</span>
+
+	<span class="kt">var</span> <span class="n">builder</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">ContainerBuilder</span><span class="p">();</span>
+	<span class="n">builder</span><span class="p">.</span><span class="nf">Populate</span><span class="p">(</span><span class="n">services</span><span class="p">);</span>
+	<span class="k">this</span><span class="p">.</span><span class="n">ApplicationContainer</span> <span class="p">=</span> <span class="n">builder</span><span class="p">.</span><span class="nf">Build</span><span class="p">();</span>
+
+	<span class="k">return</span> <span class="k">new</span> <span class="nf">AutofacServiceProvider</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">ApplicationContainer</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h5>Zusammenfassung</h5>
+<p>Auf diesem Weg erreicht man eine sehr leichtgewichtige Anwendung, welche komplett in einem eigenen Prozess unabhängig von dem Betriebssystem und Webserver installiert werden kann. Somit erreicht man bei seiner Produktentwicklung, welchen bei Kunden vor Ort installiert werden muss, eine sehr hohe Flexibilität und ich unabhängig der Umgebung.</p>
+
+                        <!-- Meta Starts -->
+                        <!--   <div class="meta meta-post-content">
+                            <span><i class="fa fa-user"></i> <a href="#">admin</a></span>
+                            <span class="date"><i class="fa fa-calendar"></i> 9 January 2017</span>
+                            <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span>
+                            <span><i class="fa fa-tags"></i> js, php, html</span>
+                            <span class="permalink"><i class="fa fa-link"></i> <a href="/blog/2017/09/22/selfhosted-asp-net-core-2-0-application/">permalink</a></span>
+                        </div> -->
+                        <!-- Meta Ends -->
+                    </div>
+                    <!-- Excerpt Ends -->
+                    <!-- Comments Starts -->
+                </article>
+                <!-- Article Ends -->
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+        <footer id="footer">
+            <style>
+    #cookie-notice {
+        width: 100vw;
+        background: #ccc;
+        padding: 0.5rem 1rem;
+        display: none;
+        text-align: center;
+    }
+
+    #cookie-notice span {
+        color: #000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        color: #fff;
+    }
+
+    #cookie-notice a span {
+        color: #fff;
+    }
+
+    #cookie-notice a:hover span {
+        color: #fff;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice span {
+            display: block;
+            padding-top: 3px;
+            margin-bottom: 1rem;
+        }
+
+        #cookie-notice a {
+            position: relative;
+            bottom: 4px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>We would like to use third party cookies and scripts to improve the functionality of this website.</span>
+    <a id="cookie-notice-accept" class="btn">
+        <span>Approve</span>
+    </a>
+    <a href="/privacy" class="btn">
+        <span>
+            More info
+        </span>
+    </a>
+</div>
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    if (readCookie('cookie-notice-dismissed') == 'true') {
+        // Load Google Analytics here
+    } else {
+        document.getElementById('cookie-notice').style.display = 'block';
+    }
+    document.getElementById('cookie-notice-accept').addEventListener("click", function () {
+        createCookie('cookie-notice-dismissed', 'true', 31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+</script>
+            <div class="social-media">
+                <a href="https://twitter.com/roeb" target="_blank">
+                    <div class="social-icon twitter"></div>
+                </a>
+                <a href="https://github.com/roeb" target="_blank">
+                    <div class="social-icon github"></div>
+                </a>
+                <a href="https://www.linkedin.com/in/robert-meyer-332b2b28/" target="_blank">
+                    <div class="social-icon linkedin"></div>
+                </a>
+                <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank">
+                    <div class="social-icon xing"></div>
+                </a>
+                <a href="https://keybase.io/roeb/" target="_blank">
+                    <div class="social-icon keybase"></div>
+                </a>
+                <a href="https://meyer-consulting.net/feed.xml" target="_blank">
+                    <div class="social-icon rss"></div>
+                </a>
+                <div class="legal-notice">
+                    <a href="/impressum">
+                        Legal notice
+                    </a>
+                    <a href="/privacy">
+                        Privacy notice
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Main Content Ends -->
+
+
+    <!-- Template JS Files -->
+    <script src="/assets/js/jquery-2.2.4.min.js"></script>
+    <script src="/assets/js/jquery.animatedheadline.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/transition.js"></script>
+    <!-- Main JS Initialization File -->
+    <script src="/assets/js/custom.js"></script>
+</body>
+
+</html>
