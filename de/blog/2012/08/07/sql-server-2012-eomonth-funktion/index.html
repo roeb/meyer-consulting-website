@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Robert Meyer Consulting</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="/Logo.ico">
+
+    <!-- Template Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+    <!-- Template CSS Files -->
+    <link type="text/css" media="all" href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/jquery.animatedheadline.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/style.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/skins/goldrenrod.css" rel="stylesheet">
+    <link type="text/css" media="all" href="/assets/css/rougify-github.css" rel="stylesheet">
+
+    <!-- Template JS Files -->
+    <script src="/assets/js/modernizr.js"></script>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>SQL Server 2012: EOMONTH Funktion | Robert Meyer Consulting</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="SQL Server 2012: EOMONTH Funktion" />
+<meta name="author" content="Robert Meyer" />
+<meta property="og:locale" content="de" />
+<meta name="description" content="Mit dem SQL Server 2012 ist eine neue Datumsfunktion dazu gekommen. Mit EOMONTH ist es möglich sich den letzten Tag des Monats ausgeben zu lassen. Dies ist besonders interessant wenn man Wertebereiche innerhalb eines Monats oder über mehrere Monate Tag genau selektieren möchte." />
+<meta property="og:description" content="Mit dem SQL Server 2012 ist eine neue Datumsfunktion dazu gekommen. Mit EOMONTH ist es möglich sich den letzten Tag des Monats ausgeben zu lassen. Dies ist besonders interessant wenn man Wertebereiche innerhalb eines Monats oder über mehrere Monate Tag genau selektieren möchte." />
+<link rel="canonical" href="https://meyer-consulting.net/de/blog/2012/08/07/sql-server-2012-eomonth-funktion/" />
+<meta property="og:url" content="https://meyer-consulting.net/de/blog/2012/08/07/sql-server-2012-eomonth-funktion/" />
+<meta property="og:site_name" content="Robert Meyer Consulting" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2012-08-07T06:18:03-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="SQL Server 2012: EOMONTH Funktion" />
+<meta name="twitter:site" content="@roeb" />
+<meta name="twitter:creator" content="@Robert Meyer" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Robert Meyer"},"description":"Mit dem SQL Server 2012 ist eine neue Datumsfunktion dazu gekommen. Mit EOMONTH ist es möglich sich den letzten Tag des Monats ausgeben zu lassen. Dies ist besonders interessant wenn man Wertebereiche innerhalb eines Monats oder über mehrere Monate Tag genau selektieren möchte.","@type":"BlogPosting","url":"https://meyer-consulting.net/de/blog/2012/08/07/sql-server-2012-eomonth-funktion/","dateModified":"2012-08-07T06:18:03-05:00","datePublished":"2012-08-07T06:18:03-05:00","headline":"SQL Server 2012: EOMONTH Funktion","mainEntityOfPage":{"@type":"WebPage","@id":"https://meyer-consulting.net/de/blog/2012/08/07/sql-server-2012-eomonth-funktion/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-160199639-1', 'auto');
+	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+	ga('set', 'anonymizeIp', false);
+    </script>
+    <!-- End Google Analytics -->
+    </head>
+
+<body class="dark fullscreendark">
+    <div class="page">
+        <div class="stretchy-nav-background"></div>
+        <!-- Header Starts -->
+        <header id="header">
+            <!-- Stretchy Navigation Starts -->
+            <div class="cd-stretchy-nav">
+    <a class="cd-nav-trigger" href="#0">
+        <span aria-hidden="true"></span>
+    </a>
+    <ul class="stretchy-nav">
+        
+        <li >
+            <a href="/de/">
+                <span>
+                    Start
+                </span>
+            </a>
+        </li>
+        
+        <li >
+            <a href="/de/about">
+                <span>
+                    Über mich
+                </span>
+            </a>
+        </li>
+        
+        <li >
+            <a href="/de/services">
+                <span>
+                    Dienstleistungen
+                </span>
+            </a>
+        </li>
+        
+        <li >
+            <a href="/de/blog">
+                <span>
+                    Blog
+                </span>
+            </a>
+        </li>
+        
+        <li >
+            <a href="/de/contact">
+                <span>
+                    Kontakt
+                </span>
+            </a>
+        </li>
+        
+    </ul>
+    <span aria-hidden="true" class="stretchy-nav-bg"></span>
+</div>
+            <!-- Stretchy Navigation Ends -->
+        </header>
+        <!-- Header Ends -->
+        <!-- Main Content Starts -->
+        <main id="main">
+            <span class="back-mobile" id="back-mobile"><i class="fa fa-arrow-left"></i></span>
+
+            <!-- <h1>SQL Server 2012: EOMONTH Funktion</h1>
+<p>07 Aug 2012 - Robert Meyer</p>
+
+<p>Mit dem SQL Server 2012 ist eine neue Datumsfunktion dazu gekommen. Mit EOMONTH ist es möglich sich den letzten Tag des Monats ausgeben zu lassen. Dies ist besonders interessant wenn man Wertebereiche innerhalb eines Monats oder über mehrere Monate Tag genau selektieren möchte.</p>
+
+<p>So wendet man EOMONTH an, um sich den letzten Tag des Monats August im Jahr 2012 ausgegeben zu lassen:</p>
+
+<p><img src="/assets/img/blog/2012/eomonth_1.png" alt="settings" /></p>
+
+<p>Man kann jedoch auch Monat dazu addieren oder abziehen. Hierfür steht ein optionaler Operator zur Verfügung.</p>
+
+<p><img src="/assets/img/blog/2012/eomonth_2.png" alt="settings" /></p>
+
+<p>Es ist nur eine kleiner Erweiterung, aber sie erleichtert doch auf angenehme Art die Arbeit mit TSQL.</p>
+ -->
+<div class="dark blog wrapper">
+    <div class="container-fluid page-title post-title">
+        <div class="content-banner">
+            <h2 class="text-center">
+                <span>SQL Server 2012: EOMONTH Funktion</span>
+            </h2>
+            <div class="meta">
+                <span><i class="fa fa-user"></i> <a href="#">Robert Meyer</a></span>
+                <span class="date"><i class="fa fa-calendar"></i>07 Aug 2012</span>
+                <!-- <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span> -->
+                <span><i class="fa fa-tags"></i>
+                    
+                    <span>EOMONTH</span>
+                    
+                    <span>SQL Server 2012</span>
+                    
+                </span>
+                <span class="permalink"><i class="fa fa-link"></i> <a href="/blog/2012/08/07/sql-server-2012-eomonth-funktion/">permalink</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="content">
+                <!-- Article Starts -->
+                <article>
+                    <!-- Excerpt Starts -->
+                    <div class="blog-excerpt post">
+                        <p>Mit dem SQL Server 2012 ist eine neue Datumsfunktion dazu gekommen. Mit EOMONTH ist es möglich sich den letzten Tag des Monats ausgeben zu lassen. Dies ist besonders interessant wenn man Wertebereiche innerhalb eines Monats oder über mehrere Monate Tag genau selektieren möchte.</p>
+
+<p>So wendet man EOMONTH an, um sich den letzten Tag des Monats August im Jahr 2012 ausgegeben zu lassen:</p>
+
+<p><img src="/assets/img/blog/2012/eomonth_1.png" alt="settings" /></p>
+
+<p>Man kann jedoch auch Monat dazu addieren oder abziehen. Hierfür steht ein optionaler Operator zur Verfügung.</p>
+
+<p><img src="/assets/img/blog/2012/eomonth_2.png" alt="settings" /></p>
+
+<p>Es ist nur eine kleiner Erweiterung, aber sie erleichtert doch auf angenehme Art die Arbeit mit TSQL.</p>
+
+                        <!-- Meta Starts -->
+                        <!--   <div class="meta meta-post-content">
+                            <span><i class="fa fa-user"></i> <a href="#">admin</a></span>
+                            <span class="date"><i class="fa fa-calendar"></i> 9 January 2017</span>
+                            <span><i class="fa fa-commenting"></i> <a href="blog-post.html">18</a></span>
+                            <span><i class="fa fa-tags"></i> js, php, html</span>
+                            <span class="permalink"><i class="fa fa-link"></i> <a href="/blog/2012/08/07/sql-server-2012-eomonth-funktion/">permalink</a></span>
+                        </div> -->
+                        <!-- Meta Ends -->
+                    </div>
+                    <!-- Excerpt Ends -->
+                    <!-- Comments Starts -->
+                </article>
+                <!-- Article Ends -->
+            </div>
+        </div>
+    </div>
+</div>
+        </main>
+        <footer id="footer">
+            <style>
+    #cookie-notice {
+        width: 100vw;
+        background: #ccc;
+        padding: 0.5rem 1rem;
+        display: none;
+        text-align: center;
+    }
+
+    #cookie-notice span {
+        color: #000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        color: #fff;
+    }
+
+    #cookie-notice a span {
+        color: #fff;
+    }
+
+    #cookie-notice a:hover span {
+        color: #fff;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice span {
+            display: block;
+            padding-top: 3px;
+            margin-bottom: 1rem;
+        }
+
+        #cookie-notice a {
+            position: relative;
+            bottom: 4px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>
+        Wir würden gerne Cookies und Skripte von Dritten verwenden, um die Funktionalität dieser Website zu verbessern.
+    </span>
+    <a id="cookie-notice-accept" class="btn">
+        <span>
+            Erlauben
+        </span>
+    </a>
+    <a href="/privacy" class="btn">
+        <span>
+            Informationen
+        </span>
+    </a>
+</div>
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    if (readCookie('cookie-notice-dismissed') == 'true') {
+        // Load Google Analytics here
+    } else {
+        document.getElementById('cookie-notice').style.display = 'block';
+    }
+    document.getElementById('cookie-notice-accept').addEventListener("click", function () {
+        createCookie('cookie-notice-dismissed', 'true', 31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+</script>
+            <div class="social-media">
+                <div class="language">
+                    
+                    <a href="https://meyer-consulting.net/en/">
+                        <img src="/assets/icons/usa.png" alt="" />
+                    </a>
+                    
+                </div>
+
+                <div class="social-media icons">
+                    <a href="https://twitter.com/roeb" target="_blank">
+                        <div class="social-icon twitter"></div>
+                    </a>
+                    <a href="https://github.com/roeb" target="_blank">
+                        <div class="social-icon github"></div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/robert-meyer-332b2b28/" target="_blank">
+                        <div class="social-icon linkedin"></div>
+                    </a>
+                    <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank">
+                        <div class="social-icon xing"></div>
+                    </a>
+                    <a href="https://keybase.io/roeb/" target="_blank">
+                        <div class="social-icon keybase"></div>
+                    </a>
+                    <a href="https://meyer-consulting.net/feed.xml" target="_blank">
+                        <div class="social-icon rss"></div>
+                    </a>
+                </div>
+
+                <div class="legal-notice">
+                    <a href="/de/impressum">
+                        Impressum
+                    </a>
+                    <a href="/de/privacy">
+                        Datenschutz
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Main Content Ends -->
+
+
+    <!-- Template JS Files -->
+    <script src="/assets/js/jquery-2.2.4.min.js"></script>
+    <script src="/assets/js/jquery.animatedheadline.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/transition.js"></script>
+    <!-- Main JS Initialization File -->
+    <script src="/assets/js/custom.js"></script>
+</body>
+
+</html>
