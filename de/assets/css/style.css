@@ -1403,6 +1403,11 @@ div.container.page-title {
   mask: url('../icons/keybase.svg') no-repeat center;
 }
 
+#footer .social-icon.malt {
+  -webkit-mask: url('../icons/malt.svg') no-repeat center;
+  mask: url('../icons/malt.svg') no-repeat center;
+}
+
 #footer .social-icon.rss {
   -webkit-mask: url('../icons/rss.svg') no-repeat center;
   mask: url('../icons/rss.svg') no-repeat center;
