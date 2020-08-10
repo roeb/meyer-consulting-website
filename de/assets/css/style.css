@@ -172,7 +172,8 @@ h6 {
   line-height: 46px;
   font-size: 15px;
   text-transform: uppercase;
-  color: #fff;
+  /* color: #fff; */
+  color: #333;
   padding: 0 33px;
   outline: none !important;
   overflow: hidden;
@@ -1526,6 +1527,10 @@ body.light .personal-info ul h6 {
   min-width: 120px;
 }
 
+.personal-info ul li div span {
+  color: #fff;
+}
+
 .personal-abstract {
   padding: 0 15px;
 }
@@ -1771,6 +1776,10 @@ body.light .personal-info ul h6 {
   padding: 20px 40px;
   display: flex;
   align-items: center;
+}
+
+.skill-box span {
+  color: #333;
 }
 
 .skill-box .skill-item {

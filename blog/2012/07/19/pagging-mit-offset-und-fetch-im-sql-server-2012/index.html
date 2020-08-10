@@ -41,7 +41,7 @@
 <meta name="twitter:site" content="@roeb" />
 <meta name="twitter:creator" content="@Robert Meyer" />
 <script type="application/ld+json">
-{"url":"https://meyer-consulting.net/blog/2012/07/19/pagging-mit-offset-und-fetch-im-sql-server-2012/","@type":"BlogPosting","headline":"Paging mit OFFSET und FETCH im SQL Server 2012","dateModified":"2012-07-19T00:25:45-05:00","datePublished":"2012-07-19T00:25:45-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://meyer-consulting.net/blog/2012/07/19/pagging-mit-offset-und-fetch-im-sql-server-2012/"},"author":{"@type":"Person","name":"Robert Meyer"},"description":"Lange hat es gedauert, doch nun beherrscht der SQL Server mit Version 2012 endlich das Paging. Unter Paging versteht man die Festlegung davon wie viele Datensätze pro Seite ausgeben werden sollen. Dies wird besonders bei diversen Webapplikationen benötigt um die Anzahl der geladenen Daten zu verringern.","@context":"https://schema.org"}</script>
+{"url":"https://meyer-consulting.net/blog/2012/07/19/pagging-mit-offset-und-fetch-im-sql-server-2012/","@type":"BlogPosting","headline":"Paging mit OFFSET und FETCH im SQL Server 2012","dateModified":"2012-07-19T00:25:45-05:00","datePublished":"2012-07-19T00:25:45-05:00","author":{"@type":"Person","name":"Robert Meyer"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://meyer-consulting.net/blog/2012/07/19/pagging-mit-offset-und-fetch-im-sql-server-2012/"},"description":"Lange hat es gedauert, doch nun beherrscht der SQL Server mit Version 2012 endlich das Paging. Unter Paging versteht man die Festlegung davon wie viele Datensätze pro Seite ausgeben werden sollen. Dies wird besonders bei diversen Webapplikationen benötigt um die Anzahl der geladenen Daten zu verringern.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -54,7 +54,7 @@
 
     ga('create', 'UA-160199639-1', 'auto');
 	ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
-	ga('set', 'anonymizeIp', false);
+	ga('set', 'anonymizeIp', true);
     </script>
     <!-- End Google Analytics -->
     </head>
@@ -66,13 +66,13 @@
         <header id="header">
             <!-- Stretchy Navigation Starts -->
             <div class="cd-stretchy-nav">
-    <a class="cd-nav-trigger" href="#0">
+    <a class="cd-nav-trigger" href="#0" aria-label="Navigation">
         <span aria-hidden="true"></span>
     </a>
     <ul class="stretchy-nav">
         
         <li >
-            <a href="/en/">
+            <a href="/">
                 <span>
                     Home
                 </span>
@@ -80,7 +80,7 @@
         </li>
         
         <li >
-            <a href="/en/about">
+            <a href="/about">
                 <span>
                     About me
                 </span>
@@ -88,7 +88,7 @@
         </li>
         
         <li >
-            <a href="/en/services">
+            <a href="/services">
                 <span>
                     My services
                 </span>
@@ -96,7 +96,7 @@
         </li>
         
         <li >
-            <a href="/en/blog">
+            <a href="/blog">
                 <span>
                     Blog
                 </span>
@@ -104,7 +104,7 @@
         </li>
         
         <li >
-            <a href="/en/contact">
+            <a href="/contact">
                 <span>
                     Contact
                 </span>
@@ -275,11 +275,11 @@
         display: inline-block;
         cursor: pointer;
         margin-left: 0.5rem;
-        color: #fff;
+        color: #333;
     }
 
     #cookie-notice a span {
-        color: #fff;
+        color: #333;
     }
 
     #cookie-notice a:hover span {
@@ -308,9 +308,9 @@
             Approve
         </span>
     </a>
-    <a href="/privacy" class="btn">
+    <a href="/privacy" class="btn" aria-label="Privacy information">
         <span>
-            More Info
+            Privacy Info
         </span>
     </a>
 </div>
@@ -353,41 +353,41 @@
             <div class="social-media">
                 <div class="language">
                     
-                    <a href="https://meyer-consulting.net/de/">
-                        <img src="/assets/icons/german.png" alt="" />
+                    <a href="https://meyer-consulting.net/de/" aria-label="German">
+                        <img src="/assets/icons/german.png" alt="German" />
                     </a>
                     
                 </div>
 
                 <div class="social-media icons">
-                    <a href="https://twitter.com/roeb" target="_blank">
+                    <a href="https://twitter.com/roeb" target="_blank" rel=”noopener”>
                         <div class="social-icon twitter"></div>
                     </a>
-                    <a href="https://github.com/roeb" target="_blank">
+                    <a href="https://github.com/roeb" target="_blank" rel=”noopener”>
                         <div class="social-icon github"></div>
                     </a>
-                    <a href="https://www.linkedin.com/in/robert-meyer-332b2b28/" target="_blank">
+                    <a href="https://www.linkedin.com/in/robert-meyer-332b2b28/" target="_blank" rel=”noopener”>
                         <div class="social-icon linkedin"></div>
                     </a>
-                    <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank">
+                    <a href="https://www.xing.com/profile/Robert_Meyer10" target="_blank" rel=”noopener”>
                         <div class="social-icon xing"></div>
                     </a>
-                    <a href="https://keybase.io/roeb/" target="_blank">
+                    <a href="https://keybase.io/roeb/" target="_blank" rel=”noopener”>
                         <div class="social-icon keybase"></div>
                     </a>
-                    <a href="https://www.malt.de/profile/robertmeyer" target="_blank">
+                    <a href="https://www.malt.de/profile/robertmeyer" target="_blank" rel=”noopener”>
                         <div class="social-icon malt"></div>
                     </a>
-                    <a href="https://meyer-consulting.net/feed.xml" target="_blank">
+                    <a href="https://meyer-consulting.net/feed.xml" target="_blank" rel=”noopener”>
                         <div class="social-icon rss"></div>
                     </a>
                 </div>
 
                 <div class="legal-notice">
-                    <a href="/en/impressum">
+                    <a href="/impressum">
                         Legal notice
                     </a>
-                    <a href="/en/privacy">
+                    <a href="/privacy" aria-label="Privacy information">
                         Privacy notice
                     </a>
                 </div>
