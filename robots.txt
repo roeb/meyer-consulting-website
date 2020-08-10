@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /impressum
+Disallow: /privacy
+Disallow: /contact
+
+Sitemap: https://meyer-consulting.net/sitemap.xml
