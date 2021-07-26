@@ -875,12 +875,12 @@ html:not(.lt-ie10) .not-animated {
   color: #000;
 }
 
-.cd-stretchy-nav ul li:nth-of-type(5) a::after {
+/* .cd-stretchy-nav ul li:nth-of-type(5) a::after {
   content: "\f09e";
   color: #000;
-}
+} */
 
-.cd-stretchy-nav ul li:nth-of-type(6) a::after {
+.cd-stretchy-nav ul li:nth-of-type(5) a::after {
   content: "\f0e6";
   color: #000;
 }
@@ -1523,7 +1523,7 @@ body.light .personal-info ul h6 {
 }
 
 .personal-info ul li div {
-  text-transform: capitalize;
+ /*  text-transform: capitalize; */
   /* margin-bottom: 7px; */
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
@@ -2154,9 +2154,14 @@ body.light .personal-info ul h6 {
   color: #daa520;
 }
 
+.talk-empty {
+  color: #fff;
+}
+
 .talk-place {
   display: block;
 }
+
 .talk-type {
   width: 60px;
   text-align: center;
